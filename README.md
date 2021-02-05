@@ -2,7 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+I still need to figure out the best approach to this challenge. The solution I came up with only works sometimes, other times it may error out (refreshing the page gets passed it). 
+Im sure the issue is with the way I'm using getServerSideProps and the way that function handles page render
+
+To run the development server:
 
 ```bash
 cd bigcommerce-front-end-challenge
