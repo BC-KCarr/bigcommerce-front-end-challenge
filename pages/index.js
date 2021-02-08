@@ -3,8 +3,8 @@ import Pagination from '@material-ui/lab/Pagination'
 import styles from '../styles/Home.module.css'
 import { withRouter } from 'next/router'
 
-function Home({ data, totalPages, router }) {
-  const [page, setPage] = useState(1)
+function Home({ data, idsArray, router }) {
+  const [page, setPage] = useState(parseInt(router.query.index) + 1 || 1)
 
   const handleChange = (event, value) => {
     setPage(value)
@@ -24,7 +24,7 @@ function Home({ data, totalPages, router }) {
       <main className={styles.main}>
         <div className={styles.headerContainer}>
           <Pagination
-            count={totalPages}
+            count={idsArray.length}
             page={page}
             onChange={handleChange}
           />
@@ -42,7 +42,7 @@ function Home({ data, totalPages, router }) {
 
 export const getServerSideProps = async (props) => {
 
-  const entryIndex = parseInt(props.query.index) || 0
+  const entryIndex = props.query.index || 0
   async function fetchData(url) {
     const response = await fetch(url)
     return response.json();
@@ -54,7 +54,7 @@ export const getServerSideProps = async (props) => {
           return {
             props: {
               data: response,
-              totalPages: ids.length
+              idsArray: ids
             }
           }
         })
